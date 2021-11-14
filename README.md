@@ -1,6 +1,6 @@
 # WeatherAssignment_synchronoss 
 
->> Please go through the screenshots and gif of the app flow below.
+>> Please go through the screenshots and gif of the app flow at the bottom of the page.
 
 ## [Download APK](https://github.com/sibaprasad12/WeatherAssignment_synchronoss/blob/master/screenshots/WeatherApp_synchronoss.apk)
 
