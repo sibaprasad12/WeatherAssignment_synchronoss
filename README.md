@@ -1,8 +1,9 @@
 # WeatherAssignment_synchronoss 
 
->> Check the screenshots and GIF image of the app at the bottom of the page
+>> Please go through the screenshots and gif of the app flow below.
 
-## [Download APK](https://github.com/sibaprasad12/TvShowAssigmnent/blob/main/app/apk/TvShowAssignment.apk)
+## [Download APK](https://github.com/sibaprasad12/WeatherAssignment_synchronoss/blob/master/screenshots/WeatherApp_synchronoss.apk)
+
 ## Assignment Objectives
 - Create a simple App that displays the current weather forecast for your devices current location, and display location and all relevant information returned in the UI.
 - Persist the response so that it can be retrieved again without having to make a further network request.
@@ -40,42 +41,50 @@
 ## How to Run the application
 - Download the APK link given above or download the project and open in Android Studio and Sync and click on run on any Emulator or Device
 - Click on the **Weather Assignment** in device dashboard
-- It will fetch the location and get the weather details from the openweathermap api
+- It will fetch the location and get the weather details from the openweathermap api for current location
 - On siccessful response, it will show the weather details for the current location
-- On every 2 hours it will fetch the weather details 
-- There are 2 tabs Top TvShows and Favourite TvShows
-- Click on the TvSHow to see the details screen
-- Click Add to Favourite or remove 
-- Scroll doan the list to load more items
-- Click on the filter FAB icon at the bottom right
-- It will display filtered TvShows by Popularity, vote average, language
-- Click on the filter FAB icon at the bottom left
-- It will display Sort TvShows by Tvshow Name, Popularity, Air date, Vote average, vote count
+- On every 2 hours it will fetch the weather details for the last location
+- User can add a location to fafourite weather List
+- User can see the weather details list in Saved weather Section
+- **Map** User can select a location and it will show the weather details for that location
 
 
-## Here is the screen shot and Gif image for the application
+## Concept Used and reason behind it
+- Work Manager - To Update the weather Location in every 2 hour(Wether app is killed or not).
+- The last weather locatin will be fetched in background.
+- **Google Map** to select a location to see the weather details
+- Used Coroutines for Background call
+
+## What I will do for future release and Missing Part 
+- Create Base module for all the common code(BaseFragment, BaseActivity, BaseInterface...)
+- Creat Network Module Separately.
+- Add Progurad Rule
+- Add Gradle Flavour
+- Optimize code and gradle speed by adding gradle script
+- Kotlin Lint, Android studio Lint rule for each commit
+- Add crashlytics
+- More test case coverage
+
+## Screenshots of the Weather Application
 <table>
 <tr>
 <td>
-  <img src="https://github.com/sibaprasad12/TvShowAssigmnent/blob/main/app/images/ss1.png" width="150" height="270" />
+  <img src="https://github.com/sibaprasad12/WeatherAssignment_synchronoss/blob/master/screenshots/screen1.png" width="170" height="300" />
  </td>
 <td>
- <img src="https://github.com/sibaprasad12/TvShowAssigmnent/blob/main/app/images/ss2.png" width="150" height="270"/> 
+ <img src="https://github.com/sibaprasad12/WeatherAssignment_synchronoss/blob/master/screenshots/screen2.png" width="170" height="300"/> 
 </td>
   <td>
-  <img src="https://github.com/sibaprasad12/TvShowAssigmnent/blob/main/app/images/ss3.png" width="150" height="270" />
+  <img src="https://github.com/sibaprasad12/WeatherAssignment_synchronoss/blob/master/screenshots/screen3.png" width="170" height="300" />
  </td>
    <td>
-  <img src="https://github.com/sibaprasad12/TvShowAssigmnent/blob/main/app/images/ss6.png" width="150" height="270" />
+  <img src="https://github.com/sibaprasad12/WeatherAssignment_synchronoss/blob/master/screenshots/screen4.png" width="170" height="300" />
  </td>
   <td>
-  <img src="https://github.com/sibaprasad12/TvShowAssigmnent/blob/main/app/images/ss4.png" width="150" height="270" />
+  <img src="https://github.com/sibaprasad12/WeatherAssignment_synchronoss/blob/master/screenshots/screen5.png" width="170" height="300" />
  </td>
-<td>
- <img src="https://github.com/sibaprasad12/TvShowAssigmnent/blob/main/app/images/ss5.png" width="150" height="270"/> 
-</td>
 </tr>
 </table> 
 
-## GIF image
-<img src="https://github.com/sibaprasad12/TvShowAssigmnent/blob/main/app/images/movieAssignment.gif" width="250" height="500" />
+## GIF image for Application Flow
+<img src="https://github.com/sibaprasad12/WeatherAssignment_synchronoss/blob/master/screenshots/weather_appflow.gif" width="250" height="500" />
