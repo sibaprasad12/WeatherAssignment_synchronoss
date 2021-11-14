@@ -1,0 +1,72 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="weatherAdapter"
+            type="synchronoss.assignment.weather.ui.adapter.WeatherAdapter" />
+
+        <variable
+            name="viewModel"
+            type="synchronoss.assignment.weather.ui.viewmodel.WeatherViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSavedWeather"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:visibility="@{viewModel.errorMessage.isEmpty() ? View.VISIBLE : View.GONE}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setAdapter="@{weatherAdapter}"
+                app:updateWeatherList="@{viewModel.weatherListFromDatabase}"
+
+                />
+
+            <ProgressBar
+                android:id="@+id/progressLoadFevWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_50dp"
+                android:visibility="@{viewModel.loadMore ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/recyclerViewSavedWeather"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvErrorFev"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#d3d3d3"
+                android:gravity="center"
+                android:text="@{viewModel.errorMessage}"
+                android:textColor="@color/red"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:visibility="@{viewModel.errorMessage.isEmpty() ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

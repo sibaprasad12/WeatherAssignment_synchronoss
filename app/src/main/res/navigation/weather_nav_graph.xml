@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav_graph"
+    app:startDestination="@id/weatherFragment">
+
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="synchronoss.assignment.weather.ui.WeatherFragment"
+        android:label="WeatherFragment"
+        tools:layout="@layout/fragment_weather">
+        <action
+            android:id="@+id/action_launcher_to_savedweather"
+            app:destination="@id/savedWeatherFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/savedWeatherFragment"
+        android:name="synchronoss.assignment.weather.ui.SavedWeatherFragment"
+        android:label="Saved Weather Fragment"
+        tools:layout="@layout/fragment_saved_weather">
+
+
+        <action
+            android:id="@+id/action_savedweather_to_weather"
+            app:destination="@id/weatherFragment">
+            <argument
+                android:name="weatherEntity"
+                app:argType="synchronoss.assignment.weather.models.WeatherEntity"
+                app:nullable="true" />
+        </action>
+
+    </fragment>
+
+</navigation>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Weather Assignment</string>
+    <string name="get_weather_by_location">Get Weather By Location</string>
+    <string name="google_maps_key">AIzaSyD1j2D9lLZymTCp38GvEbZUFgKH3d_4MM4</string>
+    <string name="weather_updated">Weather Updated</string>
+    <string name="show_location">Show Location</string>
+    <string name="show_weather_marker_location">Show Weather for marker location</string>
+    <string name="refresh">Refresh</string>
+    <string name="favorite">Favorite</string>
+    <string name="location">Location</string>
+    <string name="weathers">Saved Weather</string>
+    <string name="weather_details">Weather Details</string>
+    <string name="favorite_weathers">Favorite Weather</string>
+    <string name="delete">Delete</string>
+    <string name="select_location">Select Location For Weather</string>
+    <string name="permission_not_granted">Location Permission Not granted</string>
+    <string name="permission_enied">Permission Denied, You cannot access location data</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>

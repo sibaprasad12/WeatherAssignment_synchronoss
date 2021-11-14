@@ -1,0 +1,348 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="synchronoss.assignment.weather.ui.viewmodel.WeatherViewModel" />
+
+    </data>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/visibilityGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="cardViewOther,cardViewWeatherMain, cardViewWeather, cardViewOther" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewWeatherMain"
+                    style="@style/cardViewStyle"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp"
+                    app:cardPreventCornerOverlap="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/layoutStyle"
+                        android:paddingBottom="0dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCityName"
+                            style="@style/titleTextStyle"
+                            android:text="@{`Place : `+viewModel.weatherData.cityName}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imageViewWeather"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintEnd_toStartOf="@+id/tvTemperature"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvCityName"
+                            app:srcCompat="@mipmap/ic_launcher"
+                            app:weatherImage="@{viewModel.weatherData.weatherIcon}" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTemperature"
+                            style="@style/textStyle"
+                            android:text="@{viewModel.weatherData.temperature}"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvCityName"
+                            tools:text="Temperature" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvWeatherType"
+                            style="@style/textStyle"
+                            android:text="@{viewModel.weatherData.weatherType}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageViewWeather"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTemperature"
+                            tools:text="Weather" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTemperatureDesc"
+                            style="@style/textStyle"
+                            android:text="@{`Desc : `+viewModel.weatherData.weatherDesc}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageViewWeather"
+                            app:layout_constraintTop_toBottomOf="@+id/tvWeatherType"
+                            tools:text="Temperature" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCountryCode"
+                            style="@style/textStyle"
+                            android:layout_marginStart="5dp"
+                            android:text="@{`Country Code : `+viewModel.weatherData.country}"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageViewWeather"
+                            tools:text="Country Code" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvLatitude"
+                            style="@style/textStyle"
+                            android:layout_marginStart="5dp"
+                            android:text="@{`Lattitude : `+viewModel.weatherData.lat}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvCountryCode"
+                            tools:text="Country Code" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvLongitude"
+                            style="@style/textStyle"
+                            android:layout_marginEnd="5dp"
+                            android:text="@{`Longitude : `+viewModel.weatherData.lon}"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvCountryCode"
+                            tools:text="Longitude" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSunrise"
+                            style="@style/textStyle"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="@{`Sun Rise : `+viewModel.weatherData.sunRise}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvLatitude"
+                            tools:text="Sun Rise" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSunset"
+                            style="@style/textStyle"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="@{`Sun Set : `+viewModel.weatherData.sunSet}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvLatitude"
+                            tools:text="Sun Set" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDate"
+                            style="@style/titleTextStyle"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            android:text="@{`Date Time : `+viewModel.weatherData.dateTime}"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="normal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvSunset" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewWeather"
+                    style="@style/cardViewStyle"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp"
+                    app:cardPreventCornerOverlap="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewWeatherMain">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout style="@style/layoutStyle">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvWindDetails"
+                            style="@style/titleTextStyle"
+                            android:text="Wind Details"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTemp"
+                            style="@style/textStyle"
+                            android:layout_marginStart="5dp"
+                            android:text="@{viewModel.weatherData.temperature}"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvWindDetails"
+                            tools:text="Temperature" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvFeelsLike"
+                            style="@style/textStyle"
+                            android:layout_marginStart="5dp"
+                            android:text="@{`Feels Like : `+viewModel.weatherData.feelsLikeTemp}"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTemp"
+                            tools:text="Feels Like" />
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTempMin"
+                            style="@style/textStyle"
+                            android:layout_marginEnd="5dp"
+                            android:text="@{`Min Temp `+viewModel.weatherData.minTemp}"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike"
+                            tools:text="Min Temp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTempMax"
+                            style="@style/textStyle"
+                            android:layout_marginStart="5dp"
+                            android:text="@{`Max Temp `+viewModel.weatherData.maxTemp }"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike"
+                            tools:text="Country Code" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvPressure"
+                            style="@style/textStyle"
+                            android:layout_marginEnd="5dp"
+                            android:text="@{`Pressure : `+viewModel.weatherData.pressure}"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTempMin"
+                            tools:text="Pressure" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvHumidity"
+                            style="@style/textStyle"
+                            android:layout_marginStart="5dp"
+                            android:text="@{`Humidity : `+viewModel.weatherData.humidity}"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTempMin"
+                            tools:text="Humidity" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/titleTextStyle"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvHumidity" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewOther"
+                    style="@style/cardViewStyle"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp"
+                    app:cardPreventCornerOverlap="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewWeather"
+                    tools:layout_editor_absoluteX="4dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout style="@style/layoutStyle">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvOtherDetails"
+                            style="@style/titleTextStyle"
+                            android:text="Other Details"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvWindSpeed"
+                            style="@style/textStyle"
+                            android:layout_marginStart="5dp"
+                            android:text="@{`Wind Speed : `+viewModel.weatherData.windSpeed}"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvOtherDetails"
+                            app:layout_goneMarginTop="5dp"
+                            tools:text="Wind SPeed" />
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvWindDirection"
+                            style="@style/textStyle"
+                            android:layout_marginStart="5dp"
+                            android:text="@{`Wind Direction `+viewModel.weatherData.windDegree}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvWindSpeed"
+                            app:layout_goneMarginTop="5dp"
+                            tools:text="Wind Direction" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvGust"
+                            style="@style/textStyle"
+                            android:layout_marginStart="5dp"
+                            android:text="@{`Wind gust `+viewModel.weatherData.windGust}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvWindDirection"
+                            tools:text="Wind Gust" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/titleTextStyle"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvGust" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvErrorFev"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@{viewModel.errorMessage}"
+            android:textColor="@color/red"
+            android:background="#d3d3d3"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.errorMessage.isEmpty() ? View.GONE : View.VISIBLE}"
+            tools:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/progressLoad"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:show="@{viewModel.obsevableLoading}" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

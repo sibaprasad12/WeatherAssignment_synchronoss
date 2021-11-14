@@ -1,0 +1,173 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="weather"
+            type="synchronoss.assignment.weather.models.WeatherEntity" />
+
+        <variable
+            name="listener"
+            type="synchronoss.assignment.weather.callbacks.OnWeatherClickListener" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0.0px"
+        android:elevation="8dp"
+        android:onClick="@{() -> listener.onWeatherCLick(weather)}"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@{`City Name : ` + weather.cityName}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="City Name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@{`Country : ` + weather.country}"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Country" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewWeather"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cityName"
+                app:srcCompat="@mipmap/ic_launcher"
+                app:weatherImage="@{weather.weatherIcon}" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewFavourite"
+                android:layout_width="@dimen/dimen_30dp"
+                android:layout_height="@dimen/dimen_30dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/boarder_circle"
+                android:padding="5dp"
+                android:src="@{weather.isFavorite > 0 ? @drawable/ic_baseline_favorite_24 : @drawable/ic_not_favorite }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCountry" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@{weather.temperature}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cityName" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvWeatherType"
+                style="@style/textStyle"
+                android:text="@{weather.weatherType}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewWeather"
+                app:layout_constraintTop_toBottomOf="@+id/tvTemperature"
+                tools:text="Weather" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFeelsLikeTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@{`Feels Like : ` + weather.feelsLikeTemp}"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewWeather"
+                tools:text="Feel like Temp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvWeatherDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@{ weather.weatherDesc}"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewWeather"
+                tools:text="Minimum Temperature" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMinTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@{`Min Temp : ` + weather.minTemp}"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvFeelsLikeTemp"
+                tools:text="Minimum Temperature" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMaxTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@{`Max Temp : ` + weather.maxTemp}"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvFeelsLikeTemp"
+                tools:text="Max Temp" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvdateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@{`Date Time : ` + weather.dateTime}"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMinTemp"
+                tools:text="Date Time" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonWeatherLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/teal_700"
+                android:onClick="@{() -> listener.onLocationClick(weather)}"
+                android:text="@string/show_location"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/tvdateTime" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>
