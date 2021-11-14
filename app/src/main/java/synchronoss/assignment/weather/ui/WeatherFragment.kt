@@ -119,8 +119,9 @@ class WeatherFragment : Fragment() {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
+        // set the time to repeat the task at periodic basis
         val periodicSyncDataWork =
-            PeriodicWorkRequest.Builder(UpdateWeatherWorker::class.java, 15, TimeUnit.MINUTES)
+            PeriodicWorkRequest.Builder(UpdateWeatherWorker::class.java, 2, TimeUnit.HOURS)
                 .addTag(Constants.TAG_SYNC_WEATHER_DATA)
                 .setConstraints(constraints) // setting a backoff on case the work needs to retry
                 .setBackoffCriteria(
