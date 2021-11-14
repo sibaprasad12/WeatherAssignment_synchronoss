@@ -23,6 +23,12 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.dialogfragment_map.*
 import synchronoss.assignment.weather.R
 import synchronoss.assignment.weather.models.WeatherEntity
+import android.location.Geocoder
+import com.google.android.gms.maps.model.Marker
+import java.util.*
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
+
 
 /**
  * Created by Sibaprasad Mohanty on 12/11/21.
@@ -138,10 +144,10 @@ class WeatherMapDialogFragment : DialogFragment() {
             mMap.setOnMapClickListener {
                 googleMap?.clear()
                 observeLatLng.value = LatLng(it.latitude, it.longitude)
-                googleMap?.addMarker(
-                    MarkerOptions().position(it).title("Selected Location")
+                val marker = googleMap?.addMarker(
+                    MarkerOptions().position(it).title("Location Selected")
                         .snippet(
-                            "This is your selected Location"
+                            "To get the weather update"
                         )
                 )
             }
