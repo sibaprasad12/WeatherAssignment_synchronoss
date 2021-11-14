@@ -53,14 +53,14 @@ class WeatherAdapter(
                 @NonNull oldWeather: WeatherEntity,
                 @NonNull newWeather: WeatherEntity
             ): Boolean {
-                return oldWeather.weatherId == newWeather.weatherId
+                return oldWeather.lastUpdated == newWeather.lastUpdated
             }
 
             override fun areContentsTheSame(
                 @NonNull oldWeather: WeatherEntity,
                 @NonNull newWeather: WeatherEntity
             ): Boolean {
-                return oldWeather.weatherId == newWeather.weatherId
+                return oldWeather.lastUpdated == newWeather.lastUpdated
             }
         }
 

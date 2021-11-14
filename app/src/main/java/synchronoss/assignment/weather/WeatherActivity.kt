@@ -6,11 +6,13 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.work.*
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import synchronoss.assignment.weather.utils.CommonUtils
+
 
 /**
  * Created by Sibaprasad Mohanty on 10/11/21.
@@ -44,17 +46,17 @@ class WeatherActivity : AppCompatActivity() {
                     // in your app.
                     Snackbar.make(
                         rootContainer,
-                        "Permission Granted, Now you can access location data and camera.",
+                        "Permission Granted, Now you can access location data",
                         Snackbar.LENGTH_LONG
                     ).show()
                 } else {
-                    Snackbar.make(
-                        rootContainer,
-                        getString(R.string.permission_enied),
-                        Snackbar.LENGTH_LONG
-                    ).show()
 
-                    if (!shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(
+                            this,
+                            ACCESS_FINE_LOCATION
+                        )
+                    ) {
+                        // case 4 User has denied permission but not permanently
                         showMessageOKCancel(
                             getString(R.string.permission_not_granted)
                         ) { _, _ ->
@@ -63,6 +65,14 @@ class WeatherActivity : AppCompatActivity() {
                                 PERMISSION_REQUEST_CODE
                             )
                         }
+                    } else {
+                        // case 5. Permission denied permanently.
+                        // You can open Permission setting's page from here now.
+                        Snackbar.make(
+                            rootContainer,
+                            getString(R.string.permission_enied),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                 }
                 return
@@ -73,7 +83,7 @@ class WeatherActivity : AppCompatActivity() {
         }
     }
 
-    fun showMessageOKCancel(message: String, okListener: DialogInterface.OnClickListener) {
+    private fun showMessageOKCancel(message: String, okListener: DialogInterface.OnClickListener) {
         AlertDialog.Builder(this@WeatherActivity)
             .setMessage(message)
             .setPositiveButton("OK", okListener)

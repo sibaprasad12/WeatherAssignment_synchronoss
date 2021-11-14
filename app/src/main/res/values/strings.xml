@@ -6,14 +6,16 @@
     <string name="show_location">Show Location</string>
     <string name="show_weather_marker_location">Show Weather for marker location</string>
     <string name="refresh">Refresh</string>
-    <string name="favorite">Favorite</string>
+    <string name="favorite">Favourite</string>
+    <string name="favorite_list">Favourite List</string>
     <string name="location">Location</string>
-    <string name="weathers">Saved Weather</string>
+    <string name="weathers">Saved Weathers</string>
     <string name="weather_details">Weather Details</string>
-    <string name="favorite_weathers">Favorite Weather</string>
+    <string name="favorite_weathers">Favourite Weather</string>
     <string name="delete">Delete</string>
     <string name="select_location">Select Location For Weather</string>
     <string name="permission_not_granted">Location Permission Not granted</string>
     <string name="permission_enied">Permission Denied, You cannot access location data</string>
+    <string name="added_to_favourite">Location Added to Favourite List</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

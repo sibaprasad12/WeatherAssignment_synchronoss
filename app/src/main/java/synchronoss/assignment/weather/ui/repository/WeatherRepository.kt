@@ -24,7 +24,9 @@ class WeatherRepository @Inject constructor(
     suspend fun insertWeather(weather: WeatherEntity) = weatherDao.insertWeather(weather)
     suspend fun insertAllWeather(weathers : List<WeatherEntity>) = weatherDao.insertAllWeathers(weathers)
     suspend fun getLastWeatherUpdate() = weatherDao.getLastWeatherUpdated()
+    suspend fun getAllFavouriteWeather() = weatherDao.getAllFavoriteWeathers()
     suspend fun getAllWeatherByDate() = weatherDao.getAllWeatherByDate()
+    suspend fun getAllWeatherBycityName(cityName:String) = weatherDao.getWeatherByCityName(cityName)
     suspend fun updateWeather(weather: WeatherEntity) = weatherDao.updateWeather(weather)
     suspend fun clearWeatherData() = weatherDao.clearWeatherTable()
 }

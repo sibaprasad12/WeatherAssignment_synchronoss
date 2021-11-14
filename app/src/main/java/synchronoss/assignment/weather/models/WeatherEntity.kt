@@ -15,7 +15,7 @@ import synchronoss.assignment.weather.utils.DateUtils
 @Parcelize
 @Entity
 data class WeatherEntity(
-    val id: Int, val cityName: String, val lat: Double, val lon: Double, val weatherType: String,
+    @PrimaryKey val id: Int, val cityName: String, val lat: Double, val lon: Double, val weatherType: String,
     val weatherDesc: String, val weatherIcon: String, val temperature: String,
     val minTemp: String, val maxTemp: String, val feelsLikeTemp: String,
     val pressure: Int, val humidity: Int, val windSpeed: String, val windDegree: String,
@@ -23,9 +23,8 @@ data class WeatherEntity(
     val country: String, val sunRise: String, val sunSet: String,
     var isFavorite: Int
 ) : Parcelable {
-    @PrimaryKey(autoGenerate = true)
-    var weatherId: Long = System.currentTimeMillis()
+    var lastUpdated: Long = System.currentTimeMillis()
 
     @Ignore
-    val dateTime: String? = DateUtils.getDate(weatherId, "dd/MM/yyyy hh:mm:ss.SSS")
+    val dateTime: String? = DateUtils.getDate(lastUpdated, "dd/MM/yyyy hh:mm:ss aa")
 }

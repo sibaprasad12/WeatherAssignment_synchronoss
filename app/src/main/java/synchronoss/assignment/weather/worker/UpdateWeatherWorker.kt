@@ -104,8 +104,7 @@ class UpdateWeatherWorker @AssistedInject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 Log.i(TAG, "Inserted in worker")
-                weatherRepository.insertWeather(weatherEntity)
-                delay(1000)
+                weatherRepository.updateWeather(weatherEntity)
             } catch (e: java.lang.Exception) {
 
             }

@@ -25,12 +25,12 @@ interface WeatherDao {
 
 
     @Query("SELECT * FROM WeatherEntity WHERE isFavorite > 0")
-    suspend fun getAllFavoriteWeathers(): List<WeatherEntity>
+    suspend fun getAllFavoriteWeathers(): MutableList<WeatherEntity>
 
-    @Query("SELECT * FROM WeatherEntity ORDER BY weatherId DESC")
+    @Query("SELECT * FROM WeatherEntity ORDER BY lastUpdated DESC")
     suspend fun getAllWeatherByDate(): MutableList<WeatherEntity>
 
-    @Query("SELECT * FROM WeatherEntity ORDER BY weatherId LIMIT 1")
+    @Query("SELECT * FROM WeatherEntity ORDER BY lastUpdated LIMIT 1")
     suspend fun getLastWeatherUpdated(): WeatherEntity
 
     @Query("SELECT COUNT(id) FROM WeatherEntity")
@@ -41,7 +41,6 @@ interface WeatherDao {
 
     @Query("DELETE FROM WeatherEntity")
     suspend fun clearWeatherTable()
-
 
     @Query("SELECT * FROM weatherentity LIMIT :limit OFFSET :offset")
     suspend fun loadSavedWeatherByPage(limit: Int, offset: Int): List<WeatherEntity>

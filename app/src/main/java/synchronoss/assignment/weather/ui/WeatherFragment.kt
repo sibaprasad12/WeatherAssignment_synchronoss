@@ -61,6 +61,14 @@ class WeatherFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fabAddToFavourite.setOnClickListener {
+            viewModel.addToFavourite()
+            CommonUtils.showSnackbarMessage(rootLayout,getString(R.string.added_to_favourite))
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         (requireActivity() as WeatherActivity).setUpToolbar(getString(R.string.weather_details), false)
@@ -83,7 +91,11 @@ class WeatherFragment : Fragment() {
                 super.onOptionsItemSelected(item)
             }
             R.id.menu_favourite -> {
-                viewModel.addToFavourite()
+                val action =
+                    WeatherFragmentDirections
+                        .actionLauncherToSavedweather()
+                action.favouriteWeather = 1
+                findNavController(this).navigate(action)
                 super.onOptionsItemSelected(item)
             }
             R.id.menu_location -> {
@@ -94,6 +106,7 @@ class WeatherFragment : Fragment() {
                 val action =
                     WeatherFragmentDirections
                         .actionLauncherToSavedweather()
+                action.favouriteWeather = 0
                 findNavController(this).navigate(action)
                 super.onOptionsItemSelected(item)
             }
@@ -146,14 +159,8 @@ class WeatherFragment : Fragment() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            AlertDialog.Builder(requireActivity())
-                .setMessage(getString(R.string.permission_not_granted))
-                .setPositiveButton("OK") { _, _ ->
-                    (requireActivity() as WeatherActivity).requestPermission()
-                }
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show()
+            CommonUtils.showSnackbarMessage(rootLayout, getString(R.string.permission_not_granted))
+            (requireActivity() as WeatherActivity).requestPermission()
             return
         }
 

@@ -343,6 +343,17 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             app:show="@{viewModel.obsevableLoading}" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddToFavourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add_to_favourites"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/dimen_10dp"
+            />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

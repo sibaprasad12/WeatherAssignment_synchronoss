@@ -45,7 +45,7 @@ data class WeatherResponse(
 
     val dateTime: String
         get() {
-            return DateUtils.getDate(dt.toLong(), "dd/MM/yyyy hh:mm:ss.SSS")!!
+            return DateUtils.getDate(dt.toLong(), "dd/MM/yyyy hh:mm:ss")!!
         }
 
 }

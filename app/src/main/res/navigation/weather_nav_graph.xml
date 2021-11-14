@@ -12,7 +12,12 @@
         tools:layout="@layout/fragment_weather">
         <action
             android:id="@+id/action_launcher_to_savedweather"
-            app:destination="@id/savedWeatherFragment" />
+            app:destination="@id/savedWeatherFragment">
+            <argument
+                android:name="favourite_weather"
+                app:argType="integer"
+                android:defaultValue="0" />
+        </action>
 
     </fragment>
 
@@ -21,8 +26,6 @@
         android:name="synchronoss.assignment.weather.ui.SavedWeatherFragment"
         android:label="Saved Weather Fragment"
         tools:layout="@layout/fragment_saved_weather">
-
-
         <action
             android:id="@+id/action_savedweather_to_weather"
             app:destination="@id/weatherFragment">

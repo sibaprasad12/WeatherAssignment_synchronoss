@@ -26,9 +26,16 @@ class SavedWeatherFragment : Fragment(), OnWeatherClickListener {
 
     private val viewModel by viewModels<WeatherViewModel>()
     lateinit var binding: FragmentSavedWeatherBinding
-
+    private var isFavourite = 0
     private val adapter: WeatherAdapter by lazy {
         WeatherAdapter(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            isFavourite = it.getInt("favourite_weather", 0)
+        }
     }
 
     override fun onCreateView(
@@ -55,7 +62,7 @@ class SavedWeatherFragment : Fragment(), OnWeatherClickListener {
             getString(R.string.favorite_weathers),
             false
         )
-        viewModel.getWeatherFromDatabaseByDateUpdate()
+        viewModel.getWeatherFromDatabaseByDateUpdate(isFavourite)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
