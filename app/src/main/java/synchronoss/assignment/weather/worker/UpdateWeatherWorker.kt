@@ -101,10 +101,20 @@ class UpdateWeatherWorker @AssistedInject constructor(
             weatherResponse.sys.sunsetTime,
             0
         )
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                Log.i(TAG, "Inserted in worker")
-                weatherRepository.updateWeather(weatherEntity)
+                val weatherListByCityName =
+                    weatherRepository.getAllWeatherBycityName(weatherEntity.cityName)
+                if (weatherListByCityName == null ) {
+                    weatherRepository.insertWeather(weatherEntity)
+                }
+                else{
+                    // Though the data is already exist, so update the weather
+                    weatherEntity.lastUpdated = weatherListByCityName.lastUpdated
+                    weatherEntity.isFavorite = weatherListByCityName.isFavorite
+                    weatherRepository.updateWeather(weatherEntity)
+                }
             } catch (e: java.lang.Exception) {
 
             }

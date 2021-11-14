@@ -17,5 +17,5 @@
     <string name="permission_not_granted">Location Permission Not granted</string>
     <string name="permission_enied">Permission Denied, You cannot access location data</string>
     <string name="added_to_favourite">Location Added to Favourite List</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="saved_weather">Saved Weathers</string>
 </resources>

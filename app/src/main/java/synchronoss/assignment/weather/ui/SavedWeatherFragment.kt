@@ -58,8 +58,8 @@ class SavedWeatherFragment : Fragment(), OnWeatherClickListener {
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as WeatherActivity).setUpToolbar(
-            getString(R.string.favorite_weathers),
+        (requireActivity() as WeatherActivity).setUpToolbar( if(isFavourite == 1)
+            getString(R.string.favorite_weathers) else getString(R.string.saved_weather),
             false
         )
         viewModel.getWeatherFromDatabaseByDateUpdate(isFavourite)

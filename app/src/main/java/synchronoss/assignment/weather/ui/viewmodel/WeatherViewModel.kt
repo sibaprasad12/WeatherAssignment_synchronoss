@@ -187,6 +187,7 @@ class WeatherViewModel @Inject constructor(
                 else{
                     // Though the data is already exist, so update the weather
                     weatherEntity.lastUpdated = weatherListByCityName.lastUpdated
+                    weatherEntity.isFavorite = weatherListByCityName.isFavorite
                     weatherRepository.updateWeather(weatherEntity)
                 }
             } catch (e: java.lang.Exception) {
