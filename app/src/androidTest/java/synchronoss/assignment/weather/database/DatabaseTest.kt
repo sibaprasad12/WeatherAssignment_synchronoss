@@ -3,13 +3,12 @@ package synchronoss.assignment.weather.database
 import android.content.Context
 import android.util.Log
 import androidx.room.Room
+import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
+import dagger.hilt.android.testing.HiltAndroidTest
 import io.mockk.mockk
 import junit.framework.TestCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -21,6 +20,9 @@ import java.io.IOException
  * Created by Sibaprasad Mohanty on 14/11/21.
  */
 
+@ExperimentalCoroutinesApi
+@HiltAndroidTest
+@SmallTest
 class TvShowDatabaseTest : TestCase() {
 
     private lateinit var weatherDao: WeatherDao

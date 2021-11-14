@@ -1,6 +1,7 @@
 package synchronoss.assignment.weather.data
 
 import synchronoss.assignment.weather.models.WeatherEntity
+import synchronoss.assignment.weather.models.WeatherResponse
 
 
 /**
@@ -26,6 +27,9 @@ class UnitTestData {
             list.add(getMockWeather(4, "Dublin", "Cold", "8° C", "IE", "2021-11-13"))
             return list
         }
+
+        fun getMockWeatherResponse() = WeatherResponse("abc", 0, 0, 0, "Name", 0)
+        fun getNullMockWeatherResponse() = null
 
         fun getMockWeather(
             id: Int,
