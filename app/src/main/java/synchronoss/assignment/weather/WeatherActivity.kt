@@ -102,5 +102,4 @@ class WeatherActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(homeEnable)
         actionBar?.setHomeButtonEnabled(homeEnable)
     }
-
 }
