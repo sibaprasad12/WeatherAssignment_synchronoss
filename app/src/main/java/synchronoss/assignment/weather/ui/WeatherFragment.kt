@@ -47,7 +47,7 @@ class WeatherFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        fetcWeatherhDataInBackground()
+        updateWeatherInPeriodicTimeInterval()
     }
 
     override fun onCreateView(
@@ -114,14 +114,14 @@ class WeatherFragment : Fragment() {
         }
     }
 
-    private fun fetcWeatherhDataInBackground() {
+    private fun updateWeatherInPeriodicTimeInterval() {
         // Create Network constraint
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
         // set the time to repeat the task at periodic basis
         val periodicSyncDataWork =
-            PeriodicWorkRequest.Builder(UpdateWeatherWorker::class.java, 2, TimeUnit.HOURS)
+            PeriodicWorkRequest.Builder(UpdateWeatherWorker::class.java, 30, TimeUnit.MINUTES)
                 .addTag(Constants.TAG_SYNC_WEATHER_DATA)
                 .setConstraints(constraints) // setting a backoff on case the work needs to retry
                 .setBackoffCriteria(
@@ -132,7 +132,7 @@ class WeatherFragment : Fragment() {
                 .build()
         WorkManager.getInstance(requireActivity().application).enqueueUniquePeriodicWork(
             Constants.TAG_SYNC_WEATHER_DATA,
-            ExistingPeriodicWorkPolicy.KEEP,  //Existing Periodic Work policy
+            ExistingPeriodicWorkPolicy.REPLACE,  //Existing Periodic Work policy
             periodicSyncDataWork //work request
         )
     }

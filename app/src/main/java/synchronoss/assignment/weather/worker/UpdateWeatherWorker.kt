@@ -37,25 +37,33 @@ class UpdateWeatherWorker @AssistedInject constructor(
                 CoroutineScope(Dispatchers.IO).launch {
                     val a = async { weatherRepository.getLastWeatherUpdate() }
                     val weatherEntity: WeatherEntity = a.await()
-                    val lat = if (weatherEntity != null) weatherEntity.lat else 53.350140
-                    val lon = if (weatherEntity != null) weatherEntity.lon else -6.266155
-                    weatherRepository.fetchWeatherByLocation(lat, lon)
-                        .let {
-                            if (it.isSuccessful) {
-                                val weatherResponse: WeatherResponse? = it.body()
-                                Log.e(TAG, "Worker Fetched data")
-                                weatherResponse?.let { weatherRes ->
-                                    insertWeatherData(weatherRes)
-                                    NotificationUtils.makeWeatherStatusNotification(
-                                        applicationContext.getString(R.string.weather_updated),
-                                        applicationContext
-                                    )
+
+                    if(weatherEntity != null) {
+                        weatherRepository.fetchWeatherByLocation(
+                            weatherEntity.lat,
+                            weatherEntity.lon
+                        )
+                            .let {
+                                if (it.isSuccessful) {
+
+                                    val weatherResponse: WeatherResponse? = it.body()
+                                    Log.e(TAG, "Worker Fetched data")
+                                    weatherResponse?.let { weatherRes ->
+                                        insertWeatherData(weatherRes)
+                                        NotificationUtils.makeWeatherStatusNotification(
+                                            applicationContext.getString(R.string.weather_updated),
+                                            applicationContext
+                                        )
+                                    }
+                                    Result.success()
+                                } else {
+                                    Result.retry()
                                 }
-                                Result.success()
-                            } else {
-                                Result.retry()
                             }
-                        }
+                    }
+                    else{
+                        Result.retry()
+                    }
                 }
                 Result.success()
             } catch (e: Throwable) {

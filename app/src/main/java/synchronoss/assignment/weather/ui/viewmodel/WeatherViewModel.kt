@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.liveData
+import androidx.work.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -15,7 +16,10 @@ import synchronoss.assignment.weather.models.WeatherEntity
 import synchronoss.assignment.weather.models.WeatherResponse
 import synchronoss.assignment.weather.network.ResponseState
 import synchronoss.assignment.weather.ui.repository.WeatherRepository
+import synchronoss.assignment.weather.utils.Constants
 import synchronoss.assignment.weather.utils.NetworkUtil
+import synchronoss.assignment.weather.worker.UpdateWeatherWorker
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -190,10 +194,35 @@ class WeatherViewModel @Inject constructor(
                     weatherEntity.isFavorite = weatherListByCityName.isFavorite
                     weatherRepository.updateWeather(weatherEntity)
                 }
+                updateWeatherInPeriodicTimeInterval()
             } catch (e: java.lang.Exception) {
                 obsevableLoading.set(false)
                 errorMessage.set("Database Error")
             }
+        }
+    }
+    private fun updateWeatherInPeriodicTimeInterval() {
+        // Create Network constraint
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        // set the time to repeat the task at periodic basis
+        val periodicSyncDataWork =
+            PeriodicWorkRequest.Builder(UpdateWeatherWorker::class.java, 2, TimeUnit.HOURS)
+                .addTag(Constants.TAG_SYNC_WEATHER_DATA)
+                .setConstraints(constraints) // setting a backoff on case the work needs to retry
+                .setBackoffCriteria(
+                    BackoffPolicy.LINEAR,
+                    PeriodicWorkRequest.MIN_BACKOFF_MILLIS,
+                    TimeUnit.MILLISECONDS
+                )
+                .build()
+        if (application != null) {
+            WorkManager.getInstance(application).enqueueUniquePeriodicWork(
+                Constants.TAG_SYNC_WEATHER_DATA,
+                ExistingPeriodicWorkPolicy.REPLACE,  //Existing Periodic Work policy
+                periodicSyncDataWork //work request
+            )
         }
     }
 }
